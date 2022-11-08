@@ -1,8 +1,8 @@
 package com.github.arhor.examples.restrep.data.model;
 
-public interface BaseEntity {
+public interface BaseEntity<K> {
 
-    Long getId();
+    K getId();
 
-    void setId(Long id);
+    void setId(K id);
 }

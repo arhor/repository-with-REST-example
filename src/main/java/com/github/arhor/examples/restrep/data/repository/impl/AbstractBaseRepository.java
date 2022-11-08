@@ -2,29 +2,31 @@ package com.github.arhor.examples.restrep.data.repository.impl;
 
 import com.github.arhor.examples.restrep.data.model.BaseEntity;
 import com.github.arhor.examples.restrep.data.repository.BaseRepository;
+import lombok.RequiredArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.function.Supplier;
 
-public abstract class AbstractBaseRepository<T extends BaseEntity> implements BaseRepository<T> {
+@RequiredArgsConstructor
+public abstract class AbstractBaseRepository<T extends BaseEntity<K>, K> implements BaseRepository<T, K> {
 
-    private final AtomicLong idCounter = new AtomicLong(0);
-    private final Map<Long, T> data = new ConcurrentHashMap<>();
+    private final Supplier<K> idGenerator;
+    private final Map<K, T> data = new ConcurrentHashMap<>();
 
     @Override
-    public Optional<T> findById(final Long id) {
+    public Optional<T> findById(final K id) {
         return Optional.ofNullable(data.get(id));
     }
 
     @Override
-    public List<T> findAllByIds(final Iterable<Long> ids) {
+    public List<T> findAllByIds(final Iterable<K> ids) {
         final var result = new ArrayList<T>();
 
-        for (final Long id : ids) {
+        for (final K id : ids) {
             if (data.containsKey(id)) {
                 result.add(data.get(id));
             }
@@ -41,13 +43,13 @@ public abstract class AbstractBaseRepository<T extends BaseEntity> implements Ba
     public T create(final T entity) {
         if (entity.getId() != null) {
             throw new IllegalArgumentException(
-                "Entity id expected to be null, but actually got: %d".formatted(
+                "Entity id expected to be null, but actually got: %s".formatted(
                     entity.getId()
                 )
             );
         }
 
-        final var currentEntityId = idCounter.incrementAndGet();
+        final var currentEntityId = idGenerator.get();
         entity.setId(currentEntityId);
         data.put(currentEntityId, entity);
 
@@ -55,10 +57,10 @@ public abstract class AbstractBaseRepository<T extends BaseEntity> implements Ba
     }
 
     @Override
-    public T update(final Long id, final T entity) {
+    public T update(final K id, final T entity) {
         if (!id.equals(entity.getId())) {
             throw new IllegalArgumentException(
-                "Passed id expected to be equal entity id, but actually got id: %d, entity.id: %d".formatted(
+                "Passed id expected to be equal entity id, but actually got id: %s, entity.id: %s".formatted(
                     id,
                     entity.getId()
                 )
@@ -76,7 +78,7 @@ public abstract class AbstractBaseRepository<T extends BaseEntity> implements Ba
     }
 
     @Override
-    public void deleteById(final Long id) {
+    public void deleteById(final K id) {
         data.remove(id);
     }
 }

@@ -29,8 +29,13 @@ configurations {
 }
 
 dependencies {
+    annotationProcessor 'org.projectlombok:lombok'
+    annotationProcessor "org.mapstruct:mapstruct-processor:${property('version.mapstruct')}"
     annotationProcessor 'org.springframework:spring-context-indexer'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+
+    compileOnly 'org.projectlombok:lombok'
+    compileOnly "org.mapstruct:mapstruct:${property('version.mapstruct')}"
 
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
 

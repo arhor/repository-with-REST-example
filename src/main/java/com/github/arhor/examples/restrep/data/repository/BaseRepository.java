@@ -5,21 +5,17 @@ import com.github.arhor.examples.restrep.data.model.BaseEntity;
 import java.util.List;
 import java.util.Optional;
 
-public interface BaseRepository<T extends BaseEntity> {
+public interface BaseRepository<T extends BaseEntity<K>, K> {
 
-    Optional<T> findById(Long id);
+    Optional<T> findById(K id);
 
-    List<T> findAllByIds(Iterable<Long> ids);
+    List<T> findAllByIds(Iterable<K> ids);
 
     List<T> findAll();
 
     T create(T entity);
 
-    T update(Long id, T entity);
+    T update(K id, T entity);
 
-    void deleteById(Long id);
-
-    default void delete(T entity) {
-        deleteById(entity.getId());
-    }
+    void deleteById(K id);
 }
