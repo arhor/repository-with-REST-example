@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.time.Clock;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Slf4j
 @RestControllerAdvice
@@ -20,12 +19,12 @@ public class GlobalExceptionHandler {
         log.error("Unhandled exception. Consider appropriate exception handler", exception);
 
         final var timestamp = LocalDateTime.now(Clock.systemUTC());
-        final var message = "Internal server error";
-        final var details = List.of(exception.getMessage());
+        final var message = "An error occurred processing request";
+        final var details = exception.getMessage();
 
         return new ErrorResponse(timestamp, message, details);
     }
 
-    private record ErrorResponse(LocalDateTime timestamp, String message, List<String> details) {
+    private record ErrorResponse(LocalDateTime timestamp, String message, String details) {
     }
 }
