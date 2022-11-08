@@ -1,0 +1,8 @@
+pluginManagement {
+    plugins {
+        id 'io.spring.dependency-management' version settings['version.springDependencyManagement']
+        id 'org.springframework.boot'        version settings['version.springBoot']
+    }
+}
+
+rootProject.name = 'repository-with-REST-example'

@@ -1,0 +1,53 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot'
+    id 'io.spring.dependency-management'
+}
+
+sourceCompatibility = property('version.java')
+targetCompatibility = property('version.java')
+
+wrapper {
+    gradleVersion = project.property('version.gradle')
+}
+
+repositories {
+    mavenCentral()
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+    testImplementation {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+    all {
+        exclude group: 'org.apache.logging.log4j', module: 'log4j-to-slf4j'
+        exclude group: 'org.apache.logging.log4j', module: 'log4j-api'
+    }
+}
+
+dependencies {
+    annotationProcessor 'org.springframework:spring-context-indexer'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+tasks.withType(JavaCompile) {
+    options.compilerArgs = [
+        '-Xlint:deprecation',
+        '-Xlint:fallthrough',
+        '-Xlint:unchecked',
+        '-parameters',
+    ]
+}

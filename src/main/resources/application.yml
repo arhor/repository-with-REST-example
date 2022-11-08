@@ -1,0 +1,27 @@
+server:
+  port: ${PORT:5000}
+  error:
+    whitelabel:
+      enabled: false
+
+spring:
+  application:
+    name: repository-with-REST-example
+  aop:
+    proxy-target-class: false
+  profiles:
+    active: ${SPRING_ACTIVE_PROFILES:dev}
+  jmx:
+    enabled: false
+  mvc:
+    throw-exception-if-no-handler-found: true
+    format:
+      date-time: iso
+      date: iso
+      time: iso
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration
+  output:
+    ansi:
+      enabled: detect
