@@ -1,0 +1,65 @@
+[
+    {
+        "firstName": "Scott",
+        "lastName": "Fitzgerald",
+        "books": [
+            {
+                "name": "This Side of Paradise"
+            },
+            {
+                "name": "The Beautiful and Damned"
+            },
+            {
+                "name": "The Great Gatsby"
+            },
+            {
+                "name": "Tender Is the Night"
+            },
+            {
+                "name": "The Diamond as Big as the Ritz"
+            }
+        ]
+    },
+    {
+        "firstName": "Edgar",
+        "lastName": "Poe",
+        "books": [
+            {
+                "name": "Politian"
+            },
+            {
+                "name": "The Narrative of Arthur Gordon Pym of Nantucket"
+            },
+            {
+                "name": "The Philosophy of Composition"
+            },
+            {
+                "name": "The Murders in the Rue Morgue"
+            },
+            {
+                "name": "Eldorado"
+            }
+        ]
+    },
+    {
+        "firstName": "Ernest",
+        "lastName": "Hemingway",
+        "books": [
+            {
+                "name": "In Our Time"
+            },
+            {
+                "name": "The Sun Also Rises"
+            },
+            {
+                "name": "A Farewell to Arms"
+            },
+            {
+                "name": "To Have and Have Not"
+            },
+            {
+                "name": "The Old Man and the Sea"
+            }
+        ]
+    }
+]

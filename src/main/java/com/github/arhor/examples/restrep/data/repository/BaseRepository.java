@@ -9,8 +9,6 @@ public interface BaseRepository<T extends BaseEntity<K>, K> {
 
     Optional<T> findById(K id);
 
-    List<T> findAllByIds(Iterable<K> ids);
-
     List<T> findAll();
 
     T create(T entity);

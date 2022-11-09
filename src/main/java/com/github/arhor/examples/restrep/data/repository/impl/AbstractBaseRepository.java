@@ -23,18 +23,6 @@ public abstract class AbstractBaseRepository<T extends BaseEntity<K>, K> impleme
     }
 
     @Override
-    public List<T> findAllByIds(final Iterable<K> ids) {
-        final var result = new ArrayList<T>();
-
-        for (final K id : ids) {
-            if (data.containsKey(id)) {
-                result.add(data.get(id));
-            }
-        }
-        return result;
-    }
-
-    @Override
     public List<T> findAll() {
         return new ArrayList<>(data.values());
     }

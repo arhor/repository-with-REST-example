@@ -11,6 +11,10 @@ public class Book implements BaseEntity<Long> {
 
     private Long id;
     private String name;
-    private String isbn;
     private Long authorId;
+
+    public Book(final String name, final Long authorId) {
+        this.name = name;
+        this.authorId = authorId;
+    }
 }
