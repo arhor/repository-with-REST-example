@@ -64,7 +64,7 @@ public class DatasourceConfig {
                 }
                 log.info("Datasource successfully initialized");
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                log.error("Datasource initialization failed", e);
             }
         };
     }
