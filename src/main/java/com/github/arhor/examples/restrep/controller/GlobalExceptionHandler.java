@@ -1,5 +1,6 @@
 package com.github.arhor.examples.restrep.controller;
 
+import com.github.arhor.examples.restrep.data.repository.exception.DataAccessException;
 import com.github.arhor.examples.restrep.service.exception.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -35,6 +36,16 @@ public class GlobalExceptionHandler {
             exception.getEntityName(),
             exception.getCondition()
         );
+
+        return new ErrorResponse(timestamp, message, details);
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(EntityNotFoundException.class)
+    public ErrorResponse handleDataAccessException(final DataAccessException exception) {
+        final var timestamp = LocalDateTime.now(Clock.systemUTC());
+        final var message = "Data access exception occurred";
+        final var details = exception.getMessage();
 
         return new ErrorResponse(timestamp, message, details);
     }

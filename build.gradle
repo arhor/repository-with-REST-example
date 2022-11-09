@@ -39,6 +39,7 @@ dependencies {
 
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
+    implementation "commons-lang:commons-lang:${property('version.commonsLang')}"
     implementation 'org.springframework.boot:spring-boot-starter-web'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
